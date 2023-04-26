@@ -2,84 +2,99 @@
 
 ## Fragen vor der Uebung
 
-- Was ist der Unterschied zwischen qualitativen und quantitativen Merkmalen?
+-   Was ist der Unterschied zwischen qualitativen und quantitativen Merkmalen?
 
-  - quantitativ haben zahlwerte
-  - quantitativ haben Bezeichnung als Ausprägung
+    -   quantitativ haben zahlwerte
+    -   qualitativ haben Bezeichnung als Ausprägung
 
-- Nenne je drei Beispiele für diskrete und stetige Merkmale.
+-   Nenne je drei Beispiele für diskrete und stetige Merkmale.
 
-  - diskret
-    - würfelaugen
-    - Seiten einer münze
-    - stunden auf uhr
-  - stetig
-    - Länge
-    - Temperatur
-    - Volumen
+    -   diskret
+        -   würfelaugen
+        -   Seiten einer münze
+        -   stunden auf uhr
+    -   stetig
+        -   Länge
+        -   Temperatur
+        -   Volumen
 
-- Was sind Nominal-, Ordinal- und Kardinalskala?
+-   Was sind Nominal-, Ordinal- und Kardinalskala?
 
-  - Nominal
-    - qualitative Ausprägung
-    - abstände zwischen zwei werte sind nicht messbar
-    - Ausprägung entweder gleich oder verschieden
-  - Ordinal
-    - qualitative Ausprägung
-      - können geordnet in rangfolge existieren
-      - abstände können nicht gemessen, nur in rangordnung gebracht werden
-  - Kardinal
-    - quantitativ
-    - abstände sind messbar
+    -   Nominal
+        -   qualitative Ausprägung
+        -   abstände zwischen zwei werte sind nicht messbar
+        -   Ausprägung entweder gleich oder verschieden
+    -   Ordinal
+        -   qualitative Ausprägung
+            -   können geordnet in rangfolge existieren
+            -   abstände können nicht gemessen, nur in rangordnung gebracht werden
+    -   Kardinal
+        -   quantitativ
+        -   abstände sind messbar
 
-- Was ist eine Bestandsmasse? Was ist eine Bewegungsmasse?
-  - messen des Bestandes der Merkmalsträger
-  - messen der Veränderung der Merkmalsträger
+-   Was ist eine Bestandsmasse? Was ist eine Bewegungsmasse?
+
+    -   messen des Bestandes der Merkmalsträger
+    -   messen der Veränderung der Merkmalsträger
 
 ## Aufgabe 2.1
 
-- Grundgesamtheit
-  - Menge der Personen die sich auf die Stelle beworben haben
-- Merkmalsträger
-  - einzelne person die sich auf Stelle beworben hat
-- Merkmal
-  - Geschlecht
-- Merkmalsausprägung
-  - Bachelor
-  - männlich
+-   Grundgesamtheit
+    -   Menge der Personen die sich auf die Stelle beworben haben
+-   Merkmalsträger
+    -   einzelne person die sich auf Stelle beworben hat
+-   Merkmal
+    -   Geschlecht
+-   Merkmalsausprägung
+    -   Bachelor
+    -   männlich
 
 ## Aufgabe 2.2
 
-- Wie lautet die Grundgesamtheit und warum handelt es sich dabei um eine Bestandsmasse?
-  - Unternehmen
-  - Objekte wurden befragt und nicht Veränderung beobachtet
-- Stimmt die Erhebungsgesamtheit mit der Grundgesamtheit überein? Um welche Art der Erhebung handelt es sich folglich?
-  - Stimmt nicht überein
-  - teilerhebung oder vollerhebung
-- Wie lauten die Merkmalsträger und wie die Merkmale?
-  - Unternehmen
-    - Rechtsform
-    - Bilanzsumme
-    - Anzahl der Beschäftigten
-- Die erwartete Wachstumsrate der Produktion der Unternehmen bezieht sich auf das laufende Jahr, also auf einen Zeitraum. Dennoch handelt es sich bei den erwarteten Änderungen um Bestandsdaten. Warum?
-  - Werden nicht über einen Zeitraum gemessen
-  - Wurden errechnet und sind fix
+-   Wie lautet die Grundgesamtheit und warum handelt es sich dabei um eine Bestandsmasse?
+    -   Unternehmen, alle deutschen Unternehmen
+    -   Objekte wurden befragt und nicht Veränderung beobachtet
+    -   aktueller Stand statt beobachtung über Zeitraum
+-   Stimmt die Erhebungsgesamtheit mit der Grundgesamtheit überein? Um welche Art der Erhebung handelt es sich folglich?
+    -   Stimmt nicht überein
+    -   teilerhebung
+    - primärstatistisch
+      - speziell für diese anwendung gesammelt
+-   Wie lauten die Merkmalsträger und wie die Merkmale?
+    -   Unternehmen
+        -   Rechtsform
+        -   Bilanzsumme
+        -   Anzahl der Beschäftigten
+-   Die erwartete Wachstumsrate der Produktion der Unternehmen bezieht sich auf das laufende Jahr, also auf einen Zeitraum. Dennoch handelt es sich bei den erwarteten Änderungen um Bestandsdaten. Warum?
+    -   Werden nicht über einen Zeitraum gemessen
 
 ## Aufgabe 2.3
 
-1. stetig, quantitativ, Verhältnisskala
-2. diskret, qualitativ, Ordinalskala
-3. stetig, quantitativ, Verhältnisskala
-4. diskret, qualitativ, Ordinalskala
-5. stetig, quantitativ, Verhältnisskala
-6. stetig, quantitativ, Intervallskala
-7.
-8. diskret, qualitativ, Ordinalskala
-9.
-10. stetig, quantitativ,
-11. stetig, quantitativ, Verhältnisskala
-12. stetig, quantitativ, Nominalskala
+| Beschr                     |         |             |                 |
+| ---------------------------|---------|-------------|-----------------|
+| Helligkeit gemessen        | stetig  | quantitativ | Verhältnisskala |
+| Helligkeit geschätzt       | diskret | qualitativ  | Ordinalskala    |
+| Winkel gemeessen in grad   | stetig  | quantitativ | Verhältnisskala |
+| Medaillen bei Spiele       | diskret | qualitativ  | Ordinalskala    |
+| Höhe über Meeresspiegel    | stetig  | quantitativ | Verhältnisskala |
+| Zahl der Kunden            | stetig  | quantitativ | Intervallskala  |
+| ISBN Buch                  | diskret | qualitativ  | Nominalskala    |
+| Lichdurchlässigkeit wörter | diskret | qualitativ  | Ordinalskala    |
+| Studienabschlüsse          | diskret | qualitativ  | Ordinalskala    |
+| Entfernung in km           | stetig  | quantitativ | Verhältnisskala |
+| Materialdichte gemessen    | stetig  | quantitativ | Verhältnisskala |
+| Garderobennummer           | diskret | qualitativ  | Nominalskala    |
 
 ## Aufgabe 2.4
+
+```{r}
+data <- read.table("../miete03.asc", header=TRUE)
+names(data)
+str(data)
+dim(data)
+head(data)
+View(data)
+data$nm
+```
 
 ## Aufgabe 2.5
