@@ -1,0 +1,130 @@
+---
+  title: "Aufgabenblatt 4"
+  output:
+  pdf_document: default
+  html_document:
+    df_print: paged
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Statistik für Wirtschaftsinformatiker, Übung, HTW Berlin
+### Martin Spott, Michael Heimann
+Stand: `r format(Sys.Date(), format='%d.%m.%Y')`
+
+## Wiederholung
+
+* Was messen arithmetisches Mittel, Median und Modus? Unter welchem Begriff werden sie neben anderen zusammengefasst? Wie werden sie berechnet? 
+* Auf welcher Skala muss ein Merkmal definiert sein, um das arithmetische Mittel, den Median oder den Modus bestimmen zu können?
+* Was sind Vor- und Nachteile von Mittel, Median und Modus?
+
+## Aufgabe 4.1
+Bei 30 Internetnutzern wurde die wöchentliche Zeit in Stunden festgehalten, die diese online aktiv waren: 
+
+```{r}
+stunden <- c(7, 55, 5, 8, 4, 10, 60, 7, 12, 5, 5, 10, 5, 5, 8, 10, 
+             10, 7, 4, 6, 7, 5, 6, 10, 7, 3, 6, 6, 10,  9)
+```
+
+a) Berechnen Sie den arithmetischen Mittelwert von `stunden` in R: 
+    * händisch mithilfe der Funktion `sum()`
+    * mit der Funktion `mean()`
+    und vergleichen Sie die beiden Ergebnisse.
+
+```{r}
+hand_arit_mit <- sum(stunden) / length(stunden)
+funktion_arit_mit <- mean(stunden)
+hand_arit_mit == funktion_arit_mit
+```    
+
+b) Berechnen Sie den Median von `stunden` in R:
+    * händisch, indem Sie die Formel/das Verfahren aus der Vorlesung benutzen
+    * mit der Funktion `median()`
+    
+    und vergleichen Sie die beiden Ergebnisse.
+
+```{r}
+stunden_sort <- sort(stunden)
+hand_med <- ((stunden_sort[length(stunden_sort)/2] + stunden_sort[length(stunden_sort) / 2 + 1]) / 2)
+funktion_med <- median(stunden)
+hand_med == funktion_med
+```
+
+c) Erzeugen Sie ein Histogramm von `stunden`. Variieren Sie die Anzahl der Gruppen, um eine sinnvolle Auflösung der Werteverteilung zu bekommen. 
+
+```{r}
+hist(stunden, breaks = 30, ylim = c(0, 20))
+abline(v = mean(stunden), col = "red", lwd = 3)
+abline(v = median(stunden), col = "yellow", lwd = 3)
+```
+
+d) Vergleichen Sie die Werte des arithmetischen Mittels und des Medians mit der Werteverteilung im Histogramm. Beschreiben die beiden Lagemaße adäquat das Zentrum der Verteilung? Welches der beiden Maße ist hier besser geeignet und warum?
+
+- Beschreiben nicht adequat die Verteilung
+- Beste Wahl wäre Median
+
+e) Wie kann der Datensatz so verändert werden, dass die Lagemaße das Zentrum der Verteilung besser wiedergeben? Implementieren Sie diese Veränderung in R und berechnen erneut arithmetisches Mittel und Median. 
+
+```{r}
+sort(stunden)
+stunden_trimmed <- stunden_sort[2:length(stunden)-2]
+mean(stunden_trimmed)
+median(stunden_trimmed)
+```
+
+## Aufgabe 4.2
+Eine Menge von 200 Zahlen enthält 30 mal die Vier, 70 mal die Fünf und 80 mal die Sechs. Bei den übrigen Zahlen handelt es sich um die Sieben. Berechnen Sie den arithmetischen Mittelwert.
+
+```{r}
+(30 * 4 + 70 * 5 + 80  * 6 + 20 * 7)/200
+```
+
+## Aufgabe 4.3
+Wenn das durchschnittliche Jahreseinkommen einer Person in der Landwirtschaft 45.000€ und in der Industrie 55.000€ beträgt, würde dann das durchschnittliche Einkommen beider Wirtschaftszweige 50.000€ betragen?
+
+```{r}
+mean(c(45000, 55000)) == 50000
+```
+
+## Aufgabe 4.4
+Fünf Restaurants erhielten die Bewertung: miserabel, schlecht, mäßig, gut und hervorragend. Wie lautet der Median?
+
+mäßig
+
+## Aufgabe 4.5 
+Ein Unternehmen zahlt seinen 26 Mitarbeitern folgende Stundenlöhne: 14 erhalten pro Stunde 16,50€, zehn arbeiten für 19,00€ je Stunde und zwei Mitarbeiter verdienen pro Stunde 25,00€. Welchen durchschnittlichen Stundenlohn zahlt das Unternehmen?
+
+```{r}
+(14  *  16.5 + 10 * 19 + 2 * 25)/26
+```
+
+## Aufgabe 4.6
+Gegeben ist die folgende Benotung von vier Schülern (A, B, C, D) in fünf Schulfächern.
+```{r}
+library(knitr)
+Fächer <- c("Deutsch", "Mathematik", "Physik", "Chemie", "Englisch")
+Gewichtung <- c(0.3, 0.3, 0.1, 0.1, 0.2)
+Noten_A <- c(3,3,2,2,1)
+Noten_B <- c(2,2,2,4,3)
+Noten_C <- c(3,1,2,2,4)
+Noten_D <- c(2,3,4,2,1)
+
+Benotung <- data.frame(Fächer, Gewichtung, Noten_A, Noten_B, Noten_C, Noten_D)
+kable(Benotung)
+```
+
+Errechnen Sie einmal mit und einmal ohne Berücksichtigung der Gewichtung die mittlere Benotung jedes Schülers. Wer schneidet jeweils am besten ab?
+
+```{r}
+mean(Benotung$Noten_A)
+mean(Benotung$Noten_B)
+mean(Benotung$Noten_C)
+mean(Benotung$Noten_D)
+weighted.mean(Benotung$Noten_A, Benotung$Gewichtung)
+weighted.mean(Benotung$Noten_B, Benotung$Gewichtung)
+weighted.mean(Benotung$Noten_C, Benotung$Gewichtung)
+weighted.mean(Benotung$Noten_D, Benotung$Gewichtung)
+```
+
