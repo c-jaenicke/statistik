@@ -27,7 +27,7 @@ Stand: `r format(Sys.Date(), format='%d.%m.%Y')`
 Lade den Datensatz der Entwicklung des Deutschen Aktienindex (DAX-30) von 2004 bis 2014 als `dax30.csv` von Moodle herunter und importiere ihn in R. 
 ```{r}
 # Pfad zur Datei anpassen
-dax30 <- read.csv("dax30.csv")
+dax30 <- read.csv("../dax30.csv")
 # benutze alternativ den Dialog zum Öffnen einer Datei
 # dax30 <- read.csv(file.choose())
 
@@ -36,21 +36,54 @@ dax30
 
 Mache dich mit den R-Befehlen `summary()` und `boxplot()` vertraut. 
 
-a) Berechne die Fünf-Punkte-Zusammenfassung von Höchstkurs und Tiefstkurs. Erzeuge Boxplots für die beiden Merkmale, benutze dazu die gleichnamige Funktion in R. Interpretiere die Unterschiede der beiden Boxplots bzw. deren Überlappung. Finde heraus, wie man beide Boxplots mit einem Aufruf von `boxplot()` in einer Grafik nebeneinander zeichnet.  
+a) Berechne die Fünf-Punkte-Zusammenfassung von Höchstkurs und Tiefstkurs. Erzeuge Boxplots für die beiden Merkmale, benutze dazu die gleichnamige Funktion in R. Interpretiere die Unterschiede der beiden Boxplots bzw. deren Überlappung. Finde heraus, wie man beide Boxplots mit einem Aufruf von `boxplot()` in einer Grafik nebeneinander zeichnet.
+
+```{r}
+summary(dax30)
+five_high <- fivenum(dax30$Hoechstkurs)
+five_low <- fivenum(dax30$Tiefstkurs)
+
+boxplot(five_high, five_low, names = c("Höchstkurs", "Tiefkurs"))
+```
 
 b) Berechne auf der Grundlage der Jahresendwerte die Wachstumsfaktoren für 2005 bis 2014. 
+```{r}
+end_zahlen <- dax30$Jahresende
+wachstumsfaktoren <- c()
+wachstumsfaktoren
+i <- 2
+
+while (i <= length(end_zahlen)) {
+  wert <- end_zahlen[i]/end_zahlen[i-1]
+  wachstumsfaktoren <- append(wachstumsfaktoren, wert)
+  i <- i + 1
+}
+
+wachstumsfaktoren
+```
 
 $$\text{Wachstumsfaktor\ \ } f_t = \frac{x_t}{x_{t-1}}\left(=\frac{x\text{ zum Zeitpunkt }t}{x\text{ zum Zeitpunkt }t-1}\right)$$
 
 c) Berechne das durchschnittliche Wachstum der Jahresendwerte des DAX von 2004 bis 2014 in Prozent.
 
-d) Begründe die Wahl des geometrischen Mittels zur Berechnung. 
+```{r}
+wachstumsFaktor <- (prod(wachstumsfaktoren))^(1/10)
+wachstumsFaktor
+(wachstumsFaktor - 1) * 100
+```
 
+d) Begründe die Wahl des geometrischen Mittels zur Berechnung.
 
 
 ## Aufgabe 5.2 (harmonisches Mittel)
 Ein Techniker erledigt an einem Tag drei Jobs bei Kunden und fährt insgesamt 80km. Er fährt morgens von zu Hause 15km lang mit im Schnitt 60km/h zum ersten Kunden, dann 10km weit in 12 Minuten zum zweiten Kunden, dann 40km mit 80km/h zum dritten Kunden und von dort mit durchschnittlich 70km/h nach Hause. Berechne die mittlere Geschwindigkeit über die gesamte Fahrt.   
 
+```{r}
+sec_seg_speed_2 <- 10000 / (12 * 60)
+sec_seg_speed_2 <- sec_seg_speed_2 * 3.6
+sec_seg_speed_2
+(80) / ((15 / 60) + (10 / sec_seg_speed_2) + (40 / 80) + (15 / 70))
+```
 
 
 ## Aufgabe 5.3 (Quantile, Spannweite, IQR, mittlere absolute Abweichung)
@@ -66,14 +99,26 @@ Eine Aufteilung in 10 oder 100 Anteilswerte führt zu Dezilen oder Perzentilen. 
 Lade den Datensatz `bmw.csv` von Moodle herunter und importiere ihn in R.
 ```{r}
 # Benutze den richtigen Pfad in "bmw.csv" oder stattdessen file.choose()
-bmw <- read.csv2("bmw.csv", header= T, sep= ";", dec=".")
+bmw <- read.csv2("../bmw.csv", header= T, sep= ";", dec=".")
 ```
 
 Informiere dich über den Datensatz mit den bereits bekannten R-Befehlen. Mache dich mit dem Befehl `quantile()` vertraut (benutze `type=2` als Parameter). 
 
+```{r}
+summary(bmw)
+quantile(bmw$Schluss, type = 2)
+head(bmw)
+```
+
 a) Was beinhaltet der Datensatz deiner Ansicht nach?    
 
+- Erreichte werte in einem Handelszeitraum auf einem Aktienmarkt
+
 b) Erstelle mit der R-Anweisung `hist()` ein Histogramm der Variable *Schluss*.  
+
+```{r}
+hist(bmw$Schluss)
+```
 
 c) Erstelle einen Boxplot für diese Variable.  Was ist hier alles zu sehen?  
 
