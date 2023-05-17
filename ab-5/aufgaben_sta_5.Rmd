@@ -120,12 +120,38 @@ b) Erstelle mit der R-Anweisung `hist()` ein Histogramm der Variable *Schluss*.
 hist(bmw$Schluss)
 ```
 
-c) Erstelle einen Boxplot für diese Variable.  Was ist hier alles zu sehen?  
+c) Erstelle einen Boxplot für diese Variable.  Was ist hier alles zu sehen? 
+
+- Die Schlusswerte der Aktie liegen zwischen 32.5 und 35.5, mit den meisten Werten zwischen 33.5 und 35.5.
+
+```{r}
+boxplot(bmw$Schluss)
+```
 
 d) Berechne für die Variable *Schluss*  Mittelwert, Spannweite, 
 $Q_1$,   $Q_2$,   $Q_3$ und den  Quartilsabstand (auch: IQR, Interquartilsabstand, zentraler Quartilsabstand).  
 
+```{r}
+"Spannweite:"
+(max(bmw$Schluss) - min(bmw$Schluss))
+
+"Mittelwert:"
+mean(bmw$Schluss)
+quants <- quantile(bmw$Schluss)
+quants
+quartilAbstand <- quants[3] - quants[1] 
+quartilAbstand
+
+"Lösung wäre:"
+summary(bmw$Schluss)
+```
+
 <!-- e) Berechne die absolute mittlere Abweichung für die Variable *Schluss*. -->
 
 e)  Berechne die Terzile (Drittelung) und die Dezile für die Variable *Schluss*. Interpretiere das zweite Terzil für die Variable *Schluss*.
+
+```{r}
+quantile(bmw$Schluss, seq(0, 1, 1/3))
+quantile(bmw$Schluss, seq(0, 1, 1/2))
+```
 
