@@ -1,0 +1,139 @@
+---
+output:
+  pdf_document: default
+  html_notebook: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Aufgabenblatt 7
+## Statistik für Wirtschaftsinformatiker, Übung, HTW Berlin
+### Martin Spott, Michael Heimann
+Stand: `r format(Sys.Date(), format='%d.%m.%Y')`
+
+## Wiederholung
+
+* Wofür werden Kontingenztabellen (Kontingenztafeln) verwendet? Wie sind sie aufgebaut?
+* Was versteht man unter Randsummen/Randverteilungen?
+* Was ist eine bedingte relative Häufigkeit?
+
+## Aufgabe 7.1
+Die folgende Kontingenztabelle enthält Daten zu landwirtschaftlichen Betrieben nach Führung und Größe in Hektar.
+```{r}
+
+library(knitr)
+options(knitr.kable.NA='') # zeige NAs als Leerzeichen
+
+betriebe <- matrix(c(639,64,41,744,
+                     487,131,41,659,
+                     203,153,33,389,
+                     54,91,17,162,
+                     46,112,18,176,
+                     1429,551,150,2130),
+                   nrow=6,ncol=4,byrow=T,
+                   dimnames=list(c("[0,50)", "[50, 180)", 
+                                   "[180, 500)", "[500, 1000)", ">= 1000", "Summe"),
+                                 c("Vollzeit", "Nebenerwerb", "Pacht", "Summe")))
+kable(betriebe)
+```
+
+a) Ergänze die Tabelle um die sechs fehlenden Einträge.
+<!-- b) Wie viele Zellen hat diese Kontingenztabelle? -->
+b) Wie viele Betriebe haben weniger als 50 Hektar?
+    - 744, alle aus erster Zeile
+c) Wie viele Betriebe werden von einem Pächter geführt?
+    - 150, Summe aus Pacht Spalte
+d) Wie viele Betriebe werden im Nebenerwerb betrieben und haben  zwischen 500 und 1000 Hektar?
+    - Zeile 500,1000, Nebenerwerb und Pacht zusammen
+e)  Wie viele Betriebe werden nicht im Vollerwerb betrieben?
+f) Wie viele Pachtbetriebe haben 180 Hektar oder mehr?
+g) Berechne die Kontingenztabelle mit den relativen Häufigkeiten. Runde auf die dritte Stelle nach dem Komma. 
+
+```{r}
+betriebe_kont <- betriebe[1:5, 1:3]
+round(addmargins(prop.table(betriebe_kont)), 3)
+```
+
+## Aufgabe 7.2
+Von 70 Studienanfängern wurden die Abiturnoten in  Mathematik und Englisch erfasst. Die Tabelle zeigt die Noten von sechs Studierenden, der Datensatz enthält die Noten von allen.
+```{r}
+noten <- read.csv("../noten_mathematik_englisch.csv")
+kable(head(noten))
+```
+
+a) Erstelle eine Kontingenztabelle mit den zugehörigen  Randverteilungen.
+b) Erstelle eine zweite Tabelle, die die relativen Häufigkeiten enthält. Runde auf die dritte Stelle nach dem Komma.
+c) Erstelle zu den Daten einen Mosaikplot.
+
+```{r}
+#a)
+kont_tabelle <- table(noten)
+kont_tabelle
+
+addmargins(kont_tabelle)
+
+#b)
+round(addmargins(prop.table(kont_tabelle)), 3)
+
+#c)
+# mosaikplot mit graustufen
+mosaicplot(kont_tabelle, col=T)
+```
+
+## Aufgabe 7.3
+Gegeben sei die folgende zweidimensionale Häufigkeitstabelle der beiden Merkmale $X$ und $Y$ für insgesamt 10 Beobachtungen bzw. Beobachtungspaare.
+
+
+|       |$x_1$|$x_2$|$\sum$
+|-------|-----|-----|------
+| $y_1$ |     | 3   |      
+| $y_2$ |     |     |      
+|$\sum$ |     |     |      
+
+Es ist weiter bekannt, dass $f(y_2|x_1)=0,5$ und $f(y_1|x_2)=0,5$ ist.
+Bestimme die fehlenden absoluten Häufigkeiten und trage diese in die Häufigkeitstabelle ein.
+
+|       |$x_1$|$x_2$|$\sum$
+|-------|-----|-----|------
+| $y_1$ | 2   | 3   | 5
+| $y_2$ | 2   | 3   | 5
+|$\sum$ | 4   | 6   | 10     
+
+## Aufgabe 7.4
+Im folgenden sind die Ergebnisse einer (fiktiven)$^1$ medizinischen Untersuchung zur Wirkung einer Hautsalbe zur Behandlung von Hautausschlägen. Die Frage ist, ob nach Anwendung der Salbe der Ausschlag besser oder schlimmer wird. 
+
+```{r}
+ausschlag <- matrix(c(223, 75, 107, 21), nrow=2, byrow=T, 
+                dimnames=list(c("mit Salbe","ohne Salbe"), c("besser","schlimmer")))
+kable(ausschlag)
+```
+
+a) Ohne nachzurechnen, hilft die Salbe oder schadet sie eher?
+    - hilft
+b) Ergänze die Tabelle um die Randsummen.
+
+
+c) Fertige eine Tabelle für die relativen Häufigkeiten (für die einzelnen Zellen) inklusive der Randsummen an. 
+d) Bestimme die bedingten relativen Häufigkeiten für die Zeilen und gib deren formale Darstellung $f(...)$ an.  
+e) Erstelle (auf Papier) einen relativen Häufigkeitsbaum zu den Daten sowie in R den zum Baum äquivalenten Mosaikplot. Mache dir den Zusammenhang der beiden Darstellungen klar. 
+f) Ist es aufgrund der Datenlage empfehlenswert, die Salbe gegen einen Hautausschlag zu verwenden?
+
+```{r}
+#b)
+addmargins(ausschlag)
+
+#c)
+round(addmargins(prop.table(ausschlag)), 3)
+
+#d)
+# 1 bei prop table um relative häufigkeit zu berechnen
+# 2 berechnet die randsumme nur für die zeilen
+bed_table <- round(addmargins(prop.table(ausschlag,1),2),3)
+bed_table
+```
+
+$^1$ aus einem Experiment präsentiert in dem Paper *Motivated Numeracy and Enlightened Self-Government* von D. M. Kahan u.a.,  http://papers.ssrn.com/sol3/papers.cfm?abstract_id=2319992 
+
