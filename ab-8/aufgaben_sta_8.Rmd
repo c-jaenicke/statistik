@@ -50,6 +50,24 @@ e) Was sind die Werte von Pearsons $\chi^2$-Statistik, dem $\Phi$-Koeffizienten 
 
 f) (Zusatzaufgabe) Berechnen Sie Pearsons $\chi^2$-Statistik, den $\Phi$-Koeffizienten und das Kontingenzmaß V nach Cramer aus Aufgabe c) händisch in R, in dem Sie die Formeln der Maße in R umsetzen.   
 
+```{r}
+#a
+library(DescTools)
+Phi(betriebe_daten)
+ContCoef(betriebe_daten)
+CramerV(betriebe_daten)
+
+#b
+kont_tabelle <- table(betriebe_daten)
+kont_tabelle <- addmargins(kont_tabelle)
+
+#c
+rel_kont_tabelle <- round(addmargins(prop.table(kont_tabelle)), 3)
+
+#d
+mosaicplot(betriebe_daten, col=T)
+mosaicplot(kont_tabelle, col=T)
+```
 
 ## Aufgabe 8.2
 
@@ -64,10 +82,26 @@ kable(daten)
 ```
 
 a) Berechnen Sie die bedingten relativen Häufigkeiten $f(\text{Salbe verwendet} | \text{Ausschlag besser})$ und $f(\text{Salbe nicht verwendet} | \text{Ausschlag besser})$. Sagen diese beiden Häufigkeiten etwas darüber aus, ob die Anwendung der Salbe sinnvoll ist oder nicht? Interpretieren Sie die Ergebnisse.
+```{r}
+223 / 330
+107/330
+
+# Sagen nichts darüber aus ob Salbe sinnvoll ist, da andere Seite nicht betrachtet wurde
+```
 
 b) Berechnen Sie die Kontingenztabelle für die erwarteten absoluten Häufigkeiten, die im Falle der Unabhängigkeit von Benutzung der Salbe und Hautausschlag auftreten würden. 
 
+```{r}
+addmargins(daten)
+```
+
 c) Berechnen Sie Pearsons $\chi^2$-Statistik, den $\Phi$-Koeffizienten, das Kontingenzmaß C nach Pearson und das Kontingenzmaß V nach Cramer. Benutzen Sie dazu die Funktion `assocstats()` der Bibliothek `vcd`. Was sagen uns die berechneten Werte bezüglich des Grades der Unabhängigkeit?
+
+```{r}
+library(vcd)
+assocstats(daten)
+"Laut Phi Koeffizient kaum ein Zusammenhang ob die Salbe hilft oder nicht."
+```
 
 d) Betrachten Sie folgende veränderte Kontingenztabelle:
 ```{r}

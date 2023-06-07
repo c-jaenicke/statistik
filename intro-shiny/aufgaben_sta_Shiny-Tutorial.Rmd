@@ -1,0 +1,38 @@
+---
+title: "Shiny-Tutorial"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Unsere erste Shiny-App
+
+Zunächst müssen wir die Bibliothek/das Paket `shiny` installieren, indem wir auf der Kommandozeile der Konsole in RStudio `install.packages("shiny")` ausführen. Alternativ können wir im rechten unteren Bereich von RStudio unter *Packages* die Installation auslösen. 
+
+Im Menü `File > New File` wählen wir `Shiny Web App ...` und erzeugen so eine Beispielapp, die wir schrittweise erweitern werden. Wir wählen einen passenden Namen wie *MeineErsteShinyApp*, ändern das angegebene Verzeichnis von R (wenn erwünscht) und generieren über `Create` den Beispielcode. 
+
+Am oberen Rand des Codefensters rechts können wir die App über `Run App` starten. Es sollte sich ein Fenster mit der App öffnen. 
+
+Wir sehen uns die App und anschließend den Code gemeinsam an, um uns die Funktionsweise klar zu machen. 
+
+## Auswahl der Datenspalte
+
+Im Code haben wir gesehen, dass ein Histogramm von Daten erzeugt wird, welche Messungen der Eruptionsdauer des Geysirs Faithful im Yellowstone National Park in den USA darstellen. Der zugehörige Datensatz `faithful` in R enthält aber noch eine weitere Spalte `waiting`, welche zugehörige Beobachtungen der Wartezeit zwischen zwei Eruptionen repräsentiert. Wir möchten nun Benutzer_innen ermöglichen, die Datenspalte auszuwählen, welche für die Berechnung des Histogramms benutzt wird. 
+
+Auf der UI-Seite der App fügen wir zu dem Zweck ein spezielles Drop-Down-Menü mit der Funktion `varSelectInput("variable", "Variable:", faithful)` zu. Wo und wie können wir den Schnipsel einfügen?      
+
+Auf der Serverseite müssen wir die Information über die gewählte Spalte nutzen. Die Variable `input$variable` enthält den Spaltennamen. Wo und wie können wir diese Information einfügen? Hinweis: Unter Umständen muss der Datentyp über `as.character(input$variable)` geändert werden. 
+
+Über `Run App` testen wir die neue Version. 
+
+Im Histogramm müssen wir noch die Beschriftung der x-Achse und des Titels an den Spaltennamen anpassen. 
+
+## Zufügen des Mittelwertes
+
+Als letztes fügen wir eine Checkbox hinzu, mit der man die Anzeige des Mittelwertes im Histogramm triggern kann. 
+
+Finde dazu heraus, wie man das in Shiny implementiert und fügen Sie den Code zu.  
+
+Serverseitig möchten wir den Mittelwert als eine rote senkrechte Linie im Histogramm einzeichnen, wenn die Checkbox angewählt ist.      
