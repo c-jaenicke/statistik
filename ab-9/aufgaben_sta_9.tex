@@ -1,0 +1,385 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\author{}
+\date{\vspace{-2.5em}}
+
+\begin{document}
+
+\hypertarget{aufgabenblatt-9}{%
+\section{Aufgabenblatt 9}\label{aufgabenblatt-9}}
+
+\hypertarget{statistik-fuxfcr-wirtschaftsinformatiker-uxfcbung-htw-berlin}{%
+\subsection{Statistik für Wirtschaftsinformatiker, Übung, HTW
+Berlin}\label{statistik-fuxfcr-wirtschaftsinformatiker-uxfcbung-htw-berlin}}
+
+\hypertarget{michael-heimann-shirin-riazy}{%
+\subsubsection{Michael Heimann, Shirin
+Riazy}\label{michael-heimann-shirin-riazy}}
+
+Stand: 14.06.2023
+
+\hypertarget{wiederholung}{%
+\subsection{Wiederholung}\label{wiederholung}}
+
+\begin{itemize}
+\tightlist
+\item
+  Was ist Korrelation?
+\item
+  Was ist lineare Regression?
+\item
+  Was ist die Gleichung für eine Gerade?
+\item
+  Welche ist die unabhängige und welche ist die abhängige Variable in
+  der Gleichung?
+\end{itemize}
+
+\hypertarget{aufgabe-9.1-regressionsrechnung}{%
+\subsection{Aufgabe 9.1
+(Regressionsrechnung)}\label{aufgabe-9.1-regressionsrechnung}}
+
+Laden Sie den Datensatz \texttt{Readiq} aus dem R-Paket \texttt{BSDA}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(BSDA)}
+\FunctionTok{data}\NormalTok{(Readiq)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\tightlist
+\item
+  Machen Sie sich mit dem Datensatz vertraut. Was sind die beiden
+  Merkmale in dem Datensatz?
+\item
+  Fertigen Sie ein Streudiagramm (Scatterplot) an.
+\item
+  Bestimmem Sie den Korrelationskoeffizienten nach Pearson für die
+  beiden Merkmale. Liegt keine, eine schwache, eine mittlere oder eine
+  starke positive bzw. negative Korrelation zwischen beiden Merkmalen
+  vor? Was bedeutet dies?
+\item
+  Bestimmen Sie die Geradengleichung der linearen Regression mit
+  \texttt{Readiq\$reading} als unabhängige und \texttt{Readiq\$iq} als
+  abhängige Variable. Berechnen Sie dazu die Werte von \(a\) und \(b\)
+  in R mit den Formeln aus der Vorlesung. Hinweis: Obwohl \texttt{sd()}
+  in R die Stichprobenvarianz und nicht die empirische Varianz aus den
+  Formeln ist, kann \texttt{sd()} benutzt werden, da sich die Faktoren
+  (\(1/n\) bzw. \(1/(n+1)\)) in der Formel herauskürzen.
+\item
+  Fügen Sie dem Streuungsdiagramm von \texttt{Readiq\$reading} und
+  \texttt{Readiq\$iq} die Regressionsgerade zu. Hinweis: Benutze
+  \texttt{abline()}.
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#a}
+\FunctionTok{View}\NormalTok{(Readiq)}
+\CommentTok{\# Merkmale sind reading und iq}
+
+\CommentTok{\#b}
+\FunctionTok{scatter.smooth}\NormalTok{(Readiq)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{aufgaben_sta_9_files/figure-latex/unnamed-chunk-2-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#c}
+\FunctionTok{library}\NormalTok{(DescTools)}
+\FunctionTok{ContCoef}\NormalTok{(Readiq)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.08921001
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Korrelationskoeffizient von 0.08, sehr niedrig, schwache positive Korrelation, heißt kein Zusammenhang zwischen IQ und Lesewerten}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{aufgabe-9.2-regressionsrechnung}{%
+\subsection{Aufgabe 9.2
+(Regressionsrechnung)}\label{aufgabe-9.2-regressionsrechnung}}
+
+Über die Einführung des Mindestlohns wurde lange diskutiert. Ende 2007
+veröffentlichte die \emph{Wirtschaftswoche} folgende Daten zu
+Mindestlohn (in Euro) und Arbeitslosenquote (in Prozent):
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(knitr)}
+\NormalTok{mindestlohn\_tabelle }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}\AttributeTok{row.names =} \FunctionTok{c}\NormalTok{(}\StringTok{"Irland"}\NormalTok{, }\StringTok{"Frankreich"}\NormalTok{, }\StringTok{"Großbritannien"}\NormalTok{, }
+                                            \StringTok{"Belgien"}\NormalTok{, }\StringTok{"Niederlande"}\NormalTok{, }\StringTok{"USA"}\NormalTok{, }\StringTok{"Spanien"}\NormalTok{), }
+                          \AttributeTok{Mindestlohn =} \FunctionTok{c}\NormalTok{(}\FloatTok{8.65}\NormalTok{, }\FloatTok{4.44}\NormalTok{, }\FloatTok{8.2}\NormalTok{, }\FloatTok{8.08}\NormalTok{, }\FloatTok{8.08}\NormalTok{, }\FloatTok{4.3}\NormalTok{, }\FloatTok{3.42}\NormalTok{), }
+                          \AttributeTok{Arbeitslosenquote =} \FunctionTok{c}\NormalTok{(}\FloatTok{4.4}\NormalTok{, }\FloatTok{9.0}\NormalTok{, }\FloatTok{5.5}\NormalTok{, }\FloatTok{8.2}\NormalTok{, }\FloatTok{5.5}\NormalTok{, }\FloatTok{4.6}\NormalTok{, }\FloatTok{8.5}\NormalTok{))}
+
+\FunctionTok{kable}\NormalTok{(mindestlohn\_tabelle)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{longtable}[]{@{}lrr@{}}
+\toprule\noalign{}
+& Mindestlohn & Arbeitslosenquote \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Irland & 8.65 & 4.4 \\
+Frankreich & 4.44 & 9.0 \\
+Großbritannien & 8.20 & 5.5 \\
+Belgien & 8.08 & 8.2 \\
+Niederlande & 8.08 & 5.5 \\
+USA & 4.30 & 4.6 \\
+Spanien & 3.42 & 8.5 \\
+\end{longtable}
+
+Gibt es einen linearen Zusammenhang zwischen \emph{Mindestlohn}
+(unabhängige Variable) und \emph{Arbeitslosenquote}? Stellen Sie die
+Daten in einem Streudiagramm dar, berechnen Sie die Regressionsgerade
+und fügen Sie sie dem Streudiagramm zu. Ist die Regressionsgerade eine
+sinnvolle Beschreibung der Daten?
+
+Hinweis: Benutzen Sie diesmal die Funktion \texttt{lm()} in R zur
+Berechnung der Regressionsgeraden. Weisen Sie das Ergebnis des Aufrufs
+einer Variablen zu: \texttt{regression\ \textless{}-\ lm(...)}.
+Untersuchen Sie die Ausgabe von \texttt{regression} und
+\texttt{summary(regression)} und vergleichen Sie zur Interpretation auch
+die Folien der Vorlesung.
+
+\hypertarget{aufgabe-9.3-regressionsrechnung}{%
+\subsection{Aufgabe 9.3
+(Regressionsrechnung)}\label{aufgabe-9.3-regressionsrechnung}}
+
+Benutzen Sie wieder die Daten des Mietspiegels in München von 2003.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mietspiegel }\OtherTok{\textless{}{-}} \FunctionTok{read.table}\NormalTok{(}\StringTok{"../miete03.asc"}\NormalTok{, }\AttributeTok{header=}\ConstantTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\tightlist
+\item
+  Stellen Sie den Zusammenhang zwischen der Wohnfläche
+  \texttt{mietspiegel\$wfl} als unabhängiger und Nettomiete
+  \texttt{mietspiegel\$nm} als abhängiger Variable als Streudiagramm und
+  durch die Regressionsgerade dar.
+\item
+  Stellen Sie die Geradengleichung auf und berechnen die Nettomieten für
+  die Wohnflächen 60qm, 100qm und 150qm, die sich aus der
+  Geradengleichung als Schätzwerte ergeben.
+\item
+  Betrachten Sie wie in Aufgabe 9.2 das Regressionsobjekt mit
+  \texttt{summary()}. Wie viel Prozent der Varianz von Nettomiete wird
+  durch die Wohnfläche erklärt?
+\end{enumerate}
+
+\hypertarget{aufgabe-9.4-mehrdimensionale-regressionsrechnung}{%
+\subsection{Aufgabe 9.4 (Mehrdimensionale
+Regressionsrechnung)}\label{aufgabe-9.4-mehrdimensionale-regressionsrechnung}}
+
+Wir benutzen \texttt{mietspiegel} aus Aufgabe 9.3 und untersuchen, ob
+wir Nettomiete besser schätzen können, indem wir weitere Informationen
+berücksichtigen. Wir können z.B. das Merkmal \texttt{wohnbest} durch
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{lm}\NormalTok{(nm }\SpecialCharTok{\textasciitilde{}}\NormalTok{ wfl }\SpecialCharTok{+}\NormalTok{ wohnbest, }\AttributeTok{data =}\NormalTok{ mietspiegel)}
+\end{Highlighting}
+\end{Shaded}
+
+zusätzlich zu \texttt{wfl} als Information der Regression zufügen.
+
+Die Qualität des Regressionsmodells kann in \texttt{summary()} anhand
+der Werte von
+
+\begin{itemize}
+\tightlist
+\item
+  \emph{Residuals} (je kleiner die Beträge, desto besser)
+\item
+  \emph{Residual Standard Error} (je kleiner desto besser)
+\item
+  \emph{Adjusted R-Squared} (je größer desto besser)
+\end{itemize}
+
+abgelesen werden.
+
+Fügen Sie \texttt{wohnbest}, \texttt{ww0} und \texttt{kueche} jeweils
+einzeln und in Kombination dem Regressionsmodell zu und vergleichen Sie
+die Qualität der Modelle mit Hilfe von \texttt{summary()}. Welches ist
+das beste Modell?
+
+\hypertarget{aufgabe-9.5-regressionsrechnung-mit-polynomen-huxf6herer-ordnung}{%
+\subsection{Aufgabe 9.5 (Regressionsrechnung mit Polynomen höherer
+Ordnung)}\label{aufgabe-9.5-regressionsrechnung-mit-polynomen-huxf6herer-ordnung}}
+
+Lineare Regression kann auch mit komplexeren Funktionen durchgeführt
+werden wie z.B. quadratischen Funktionen
+\(f(x) = a_1 \cdot x + a_2 \cdot x^2 + b\). In R kann man für diesen
+Fall statt der Formel \texttt{y\ \textasciitilde{}\ x} in der Funktion
+\texttt{lm()} Formeln wie \texttt{y\ \textasciitilde{}\ poly(x,2)} für
+ein quadratisches Polynom benutzen.
+
+Berechnen Sie für den folgenden Datensatz \((x,y)\) eine lineare
+Regression mit linearen, quadratischen und kubischen Formeln. Plotten
+Sie alle drei Ergebnisse als Kurven (Linienplot) im Streudiagramm der
+Daten. Vergleichen Sie die Güte der drei Modelle über
+\texttt{summary()}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x }\OtherTok{\textless{}{-}} \FunctionTok{runif}\NormalTok{(}\DecValTok{100}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{100}\NormalTok{)}
+\NormalTok{e }\OtherTok{\textless{}{-}} \FunctionTok{runif}\NormalTok{(}\DecValTok{100}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{50}\NormalTok{)}
+\NormalTok{y }\OtherTok{\textless{}{-}}\NormalTok{ x}\SpecialCharTok{\^{}}\DecValTok{2} \SpecialCharTok{+}\NormalTok{ x }\SpecialCharTok{*}\NormalTok{ e}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{aufgabe-9.6-rangkorrelation}{%
+\subsection{Aufgabe 9.6
+(Rangkorrelation)}\label{aufgabe-9.6-rangkorrelation}}
+
+Berechnen Sie in folgenden drei Datensätzen die Pearson-, Kendall- und
+Spearman-Korrelationen (r, Rho, Tau) zwischen \(x\) und \(y\). Erklären
+Sie die Unterschiede in den Werten. Erstellen Sie zur Hilfe
+Streudiagramme der drei Datensätze. Welche Korrelationsmaße sind warum
+für welchen Datensatz geeignet oder nicht?
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{y1 }\OtherTok{\textless{}{-}}\NormalTok{ x }\SpecialCharTok{+}\NormalTok{ e}
+\NormalTok{y2 }\OtherTok{\textless{}{-}}\NormalTok{ y1}\SpecialCharTok{\^{}}\DecValTok{4}
+\NormalTok{y3 }\OtherTok{\textless{}{-}}\NormalTok{ (x }\SpecialCharTok{{-}} \DecValTok{50}\NormalTok{)}\SpecialCharTok{\^{}}\DecValTok{2} \SpecialCharTok{+} \DecValTok{30} \SpecialCharTok{*}\NormalTok{ e}
+
+\NormalTok{data1 }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}\AttributeTok{x=}\NormalTok{x, }\AttributeTok{y=}\NormalTok{y1)}
+\NormalTok{data2 }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}\AttributeTok{x=}\NormalTok{x, }\AttributeTok{y=}\NormalTok{y2)}
+\NormalTok{data3 }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}\AttributeTok{x=}\NormalTok{x, }\AttributeTok{y=}\NormalTok{y3)}
+\end{Highlighting}
+\end{Shaded}
+
+
+\end{document}

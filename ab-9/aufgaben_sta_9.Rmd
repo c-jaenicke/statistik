@@ -34,6 +34,40 @@ c) Bestimmem Sie den Korrelationskoeffizienten nach Pearson für die beiden Merk
 d) Bestimmen Sie die Geradengleichung der linearen Regression mit `Readiq$reading` als unabhängige und `Readiq$iq` als abhängige Variable. Berechnen Sie dazu die Werte von $a$ und $b$ in R mit den Formeln aus der Vorlesung. Hinweis: Obwohl `sd()` in R die Stichprobenvarianz und nicht die empirische Varianz aus den Formeln ist, kann `sd()` benutzt werden, da sich die Faktoren ($1/n$ bzw. $1/(n+1)$) in der Formel herauskürzen.
 e) Fügen Sie dem Streuungsdiagramm von `Readiq$reading` und `Readiq$iq` die Regressionsgerade zu. Hinweis: Benutze `abline()`. 
 
+
+```{r}
+#a
+#View(Readiq)
+# Merkmale sind reading und iq
+
+#b
+# scatter.smooth liefert graph mit kurven
+#scatter.smooth(x = Readiq$iq, y = Readiq$reading)
+# plot liefert nur punkte, ist so gefordert
+plot(Readiq)
+
+#c
+# Koorelation von 0,87, sehr hoch positiv, bedeutet hohe Korrelation
+cor(Readiq$reading, Readiq$iq)
+
+#d
+r <- cor(Readiq$reading, Readiq$iq)
+varianz_reading <- sd(Readiq$reading)
+varianz_iq <- sd(Readiq$iq)
+
+a <- r * (varianz_reading / varianz_iq)
+a
+
+b <- mean(Readiq$reading) - a * mean(Readiq$iq)
+b
+
+model <- lm(reading ~ iq, data = Readiq)
+
+scatter.smooth(x = Readiq$iq, y = Readiq$reading)
+abline(model, col = "red", lwd = 2)
+abline(c(b,a), col = "yellow")
+```
+
 ## Aufgabe 9.2 (Regressionsrechnung)
 Über die Einführung des Mindestlohns wurde lange diskutiert. Ende 2007 veröffentlichte die *Wirtschaftswoche* folgende Daten zu Mindestlohn (in Euro) und 
 Arbeitslosenquote (in Prozent):
@@ -52,16 +86,43 @@ Gibt es einen linearen Zusammenhang zwischen *Mindestlohn* (unabhängige Variabl
 
 Hinweis: Benutzen Sie diesmal die Funktion `lm()` in R zur Berechnung der Regressionsgeraden. Weisen Sie das Ergebnis des Aufrufs einer Variablen zu: `regression <- lm(...)`. Untersuchen Sie die Ausgabe von `regression` und `summary(regression)` und vergleichen Sie zur Interpretation auch die Folien der Vorlesung.
 
+```{r}
+regression_arbeit <- lm(Arbeitslosenquote ~ Mindestlohn, data = mindestlohn_tabelle)
+round(cor(mindestlohn_tabelle$Mindestlohn, mindestlohn_tabelle$Arbeitslosenquote),2)
+summary(model2)
+plot(mindestlohn_tabelle)
+abline(regression_arbeit, col = "red", lwd = 2)
+# Regressionsgerade ist keine Sinnvolle beschreibung, da diese nicht große Arbeitslosenquote bei 6 bis 7 zeigt
+```
+
 ## Aufgabe 9.3 (Regressionsrechnung)
 Benutzen Sie wieder die Daten des Mietspiegels in München von 2003. 
 
 ```{r}
-mietspiegel <- read.table("miete03.asc", header=TRUE)
+mietspiegel <- read.table("../miete03.asc", header=TRUE)
 ```
 
 a) Stellen Sie den Zusammenhang zwischen der Wohnfläche `mietspiegel$wfl` als unabhängiger und Nettomiete `mietspiegel$nm` als abhängiger Variable als Streudiagramm und durch die Regressionsgerade dar. 
 b) Stellen Sie die Geradengleichung auf und berechnen die Nettomieten für die Wohnflächen 60qm, 100qm und 150qm, die sich aus der Geradengleichung als Schätzwerte ergeben. 
 c) Betrachten Sie wie in Aufgabe 9.2 das Regressionsobjekt mit `summary()`. Wie viel Prozent der Varianz von Nettomiete wird durch die Wohnfläche erklärt? 
+
+```{r}
+#a
+regression_miete <- lm(nm ~ wfl, data = mietspiegel)
+plot(y = mietspiegel$nm, x = mietspiegel$wfl)
+abline(regression_miete, col = "red", lwd = 2)
+
+#b
+b <- regression_miete$coefficients[1]
+a <- regression_miete$coefficients[2]
+x <- c(60, 100, 150)
+y <- a * x + b
+y
+
+#c
+summary(regression_miete)
+# 50% Streung der Miete kann durch Wohnfläche erklärt werden
+```
 
 ## Aufgabe 9.4 (Mehrdimensionale Regressionsrechnung)
 
