@@ -1,0 +1,122 @@
+---
+output:
+  pdf_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Aufgabenblatt 10
+## Statistik für Wirtschaftsinformatiker, Übung, HTW Berlin
+### Martin Spott, Michael Heimann, Shirin Riazy
+Stand: `r format(Sys.Date(), format='%d.%m.%Y')`
+
+## Wiederholung
+
+* Was ist eine Zeitreihe?
+* Was ist die Zerlegung oder Dekomposition einer Zeitreihe? Was sind die Komponenten?
+* Wie kann man eine Zeitreihe glätten? Was sind die Unterscheide zwischen den Techniken?
+
+## Aufgabe 10.1 (Zeitreihen)
+Lese den Datensatz `call_volume_daily_timeseries.csv` ein, in dem die Anzahl der Anrufe in einem Call-Center protokolliert sind.  
+
+```{r}
+call_volume_df <- read.csv("../call_volume_daily_timeseries.csv") 
+```
+
+a) Gib die ersten 14 Zeilen des Datensatzes aus und benutze die Funktion `summary()`, um dich mit dem Datensatz vertraut zu machen. 
+
+b) Erzeuge ein Liniendiagramm der Zeitreihe von `call_volume_df$call_volume`. Benutze die Spalte `call_volume_df$date_index` für die x-Werte. 
+
+c) Erkläre das gleichmäßige Muster in der Zeitreihe. Betrachte dazu auch die ersten 14 Zeilen des Datensatzes aus a).
+
+```{r}
+#a
+head(call_volume_df, 14)
+summary(call_volume_df)
+
+#b type = "l"
+plot(x = call_volume_df$date_index, y = call_volume_df$call_volume, "l")
+
+#c
+# aa börse am wochenenden geschlossen ist, entsteht ein regelmäßiges tief alle sieben tage
+```
+
+d) Dekomponiere die Zeitreihe in Trend, Saisonalität und Rauschen (Fehler) mit folgendem Code-Fragment. Mache dir die Elemente in der Grafik klar.  
+ ```{r, eval=FALSE}
+# Erzeuge ein Zeitreihenobjekt mit Musterlaenge von 7 Tagen
+call_volume_ts <- ts(call_volume_df[,"call_volume"], frequency=7)
+    
+# Dekomposition mit LOESS-Technik; s.window="periodic" benutzt die Information  
+# im Zeitreihenobjekt, dass wir eine Saisonalität von sieben Tagen haben
+call_volume_stl <- stl(call_volume_ts, s.window="periodic")
+    
+plot(call_volume_stl)
+```
+
+e) Glätte `call_volume_df$call_volume` mit *gleitendem Durchschnitt*. Benutze die Funktion `filter()` für gleitende Durchschnitte von 3, 7 und 30 Tagen. Berechne die gleitenden Durchschnitte *rückblickend* und *zentriert* -- betrachte dazu die Option `sides=`. Interpretiere die Unterschiede in den Kurven.  
+
+```{r}
+#e
+past_filter_three <- filter(call_volume_df, rep(1, 3), sides = 1)
+past_filter_seven <- filter(call_volume_df, rep(1 ,7), sides = 1)
+past_filter_thirty <- filter(call_volume_df, rep(1 ,30), sides = 1)
+
+plot(past_filter_three[,6], past_filter_three[,4], type = "l")
+plot(past_filter_seven[,6], past_filter_seven[,4], type = "l")
+plot(past_filter_thirty[,6], past_filter_thirty[,4], type = "l")
+
+
+centered_filter_three <- filter(call_volume_df, rep(1, 3), sides = 2)
+centered_filter_seven <- filter(call_volume_df, rep(1 ,7), sides = 2)
+centered_filter_thirty <- filter(call_volume_df, rep(1, 30), sides = 2)
+
+
+
+plot(centered_filter_three[,6], centered_filter_three[,4], type = "l")
+plot(centered_filter_seven[,6], centered_filter_seven[,4], type = "l")
+plot(centered_filter_thirty[,6], centered_filter_thirty[,4], type = "l")
+
+# 
+```
+
+## Aufgabe 10.2 (Zeitreihen)
+
+a) Erzeuge aus den Daten eine wöchentliche Zeitreihe mit folgendem Code. Installiere dazu das Paket `plyr` and mache dir die Argumente im Funktionsaufruf von `ddply()` klar. Gib die ersten paar Zeilen von `weekly_call_volume_df` aus, um das Ergebnis anzusehen.
+
+```{r, eval=FALSE}
+library(plyr)
+weekly_call_volume_df <- ddply(call_volume_df, .(week_index), 
+                               summarise, weekly_call_volume=sum(call_volume))
+#a
+# data_frame, nach week_index summieren, neue spalte weekly_call_volume mit summe von call_volume für week index füllen
+head(weekly_call_volume_df)
+```
+
+
+b) Erzeuge ein Liniendiagramm von `weekly_call_volume_df`.
+
+c) Erkläre die niedrigen Werte in den Wochen 52 und 96. Hinweis: Betrachte `call_volume_df` in den beiden Wochen. 
+
+d) Glätte die wöchentliche Zeitreihe mit der LOESS-Technik. Benutze dazu die Funktion `loess()`. Verändere den Wert des Glättungsparameters `span=` in `loess()` und betrachte die Änderungen der Glättung in den Plots. `span` nimmt Werte zwischen 0 und 1 an. 
+
+```{r}
+#b
+plot(weekly_call_volume_df$week_index, weekly_call_volume_df$weekly_call_volume, "l")
+
+#c
+weekly_call_volume_df$weekly_call_volume[52]
+weekly_call_volume_df$weekly_call_volume[96]
+# sind beides wochen um die Weihnachtsfeiertage und Neujahr herum, also letzte Kalenderwoche des Jahres
+
+#d
+glattung_zero <- loess(week_index ~ weekly_call_volume, weekly_call_volume_df, span = 0.1)
+plot(seq(1, glattung_zero$n ,1), glattung_zero$fitted, "l")
+
+glattung_pfive <- loess(week_index ~ weekly_call_volume, weekly_call_volume_df, span = 0.5)
+plot(seq(1, glattung_pfive$n ,1), glattung_pfive$fitted, "l")
+
+glattung_one <- loess(week_index ~ weekly_call_volume, weekly_call_volume_df, span = 1)
+plot(seq(1, glattung_one$n ,1), glattung_one$fitted, "l")
+```

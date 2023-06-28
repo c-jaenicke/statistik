@@ -142,6 +142,13 @@ abgelesen werden.
 
 Fügen Sie `wohnbest`, `ww0` und `kueche` jeweils einzeln und in Kombination dem Regressionsmodell zu und vergleichen Sie die Qualität der Modelle mit Hilfe von `summary()`. Welches ist das beste Modell?
 
+```{r}
+# 6,8 euro pro quadratmeter
+summary(lm(nm ~ wfl + wohnbest, data = mietspiegel))
+
+# weitere Merkmale die zu berücksichtigen sind durch + bei wfl hinzufügen
+# ACHTUNG r-squared wirt automatisch durch mehr merkmale besser, hat aber nicht zwingend etwas mit genauigkeit zu tun
+```
 
 ## Aufgabe 9.5 (Regressionsrechnung mit Polynomen höherer Ordnung)
 Lineare Regression kann auch mit komplexeren Funktionen durchgeführt werden wie z.B. quadratischen Funktionen $f(x) = a_1 \cdot x + a_2 \cdot x^2 + b$. In R kann man für diesen Fall statt der Formel `y ~ x` in der Funktion `lm()` Formeln wie `y ~ poly(x,2)` für ein quadratisches Polynom benutzen. 
